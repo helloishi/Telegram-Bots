@@ -20,6 +20,8 @@ def getTwoLevelButtons(message):
     global ButtonsDictionary
     if message.text == 'About':
         getAbout(message)
+    elif message.text == '/start':
+        pass
     elif message.text not in ButtonsDictionary['MainMenu']:
         bot.send_message(chat_id = message.chat.id, text = 'Опция не найдена.')
         bot.register_next_step_handler(message, getTwoLevelButtons)
@@ -39,6 +41,8 @@ def getThreeLevelButtons(message):
     global ButtonsDictionary
     if message.text == 'Назад':
         send_welcome(message)
+    elif message.text == '/start':
+        pass
     elif message.text not in ButtonsDictionary['MainMenu'][stepMessage.text]:
         bot.send_message(chat_id = message.chat.id, text = 'Опция не найдена.')
         bot.register_next_step_handler(message, getThreeLevelButtons)
@@ -58,6 +62,8 @@ def sendInstantView(message):
     global ButtonsDictionary
     if message.text == 'Назад':
         getTwoLevelButtons(stepMessage)
+    elif message.text == '/start':
+        pass
     else:
         if message.text not in ButtonsDictionary['MainMenu'][stepMessage.text][choiceName.text]:
             bot.send_message(chat_id = message.chat.id, text = 'Опция не найдена.')
@@ -69,8 +75,10 @@ def sendInstantView(message):
             bot.register_next_step_handler(message, backToLevelThree)
 
 def backToLevelThree(dirName):
-    if dirName.text:
+    if dirName.text != '/start':
         getThreeLevelButtons(choiceName)
+    else:
+        pass
 
 def getAbout(message):
     global ButtonsDictionary
