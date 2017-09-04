@@ -1,2 +1,1 @@
-# This is my resume.
-# All the bots that I created.
+# This is my resume. All the bots that I created.
